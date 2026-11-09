@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Почати — Splayn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 3D engine for the price cards; loaded only when the first card appears. -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><span></span><span></span><span></span><span class="follow"></span></div>
+
+  <header class="site-header">
+    <div class="bar container">
+      <a class="logo" href="index.html" aria-label="Splayn — на головну">
+        <svg class="logo-mark" viewBox="18 18 84 98" aria-hidden="true"><rect x="40" y="100" width="40" height="14" rx="7"/><rect x="28" y="80" width="64" height="14" rx="7"/><rect x="20" y="60" width="80" height="14" rx="7"/><rect x="28" y="40" width="64" height="14" rx="7"/><rect class="top" x="40" y="20" width="40" height="14" rx="7"/></svg>
+        <span class="logo-word">Splayn</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Головне меню">
+        <a href="index.html#how">Як це працює</a>
+        <a href="#business">Бізнесу</a>
+        <a href="#about">Про нас</a>
+      </nav>
+      <div class="bar-right">
+        <button class="icon-btn" id="a11y-btn" type="button" aria-pressed="false"
+                aria-label="Версія для людей з порушенням зору">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+          </svg>
+        </button>
+        <div class="lang">
+          <span class="flag" aria-hidden="true"></span>
+          <a href="#" aria-current="true">Укр</a><span class="sep" aria-hidden="true">|</span><a href="#" class="off">Eng</a>
+        </div>
+        <a class="btn btn-login" href="#login">Увійти</a>
+        <button class="icon-btn burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Меню">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="start container">
+    <h1 class="start-title">Що надрукуємо?</h1>
+
+    <div class="thread" id="thread" aria-live="polite"></div>
+
+    <!-- One field for everything: describe the part, attach your file, or both.
+         The AI assistant will search, check the file and calculate the price (next step). -->
+    <form class="composer" id="composer" novalidate>
+      <div class="files" id="files"></div>
+      <textarea id="prompt" rows="1" aria-label="Запит до помічника"
+                placeholder="Опишіть деталь або перетягніть файл STL, 3MF, OBJ"></textarea>
+      <div class="composer-row">
+        <label class="icon-btn attach" title="Додати файл" aria-label="Додати файл">
+          <input type="file" id="file" accept=".stl,.3mf,.obj" multiple hidden>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9"/>
+          </svg>
+        </label>
+        <button class="send" id="send" type="submit" aria-label="Надіслати" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+    <p class="start-note" id="note" role="status"></p>
+  </main>
+
+  <script src="js/site.js"></script>
+  <script src="js/layout-model.js"></script>
+  <script src="js/layout-fix.js"></script>
+  <script src="js/start.js"></script>
+</body>
+</html>

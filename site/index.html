@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Splayn — 3D-друк на замовлення</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/story.css">
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><span></span><span></span><span></span><span class="follow"></span></div>
+
+  <header class="site-header">
+    <div class="bar container">
+      <a class="logo" href="index.html" aria-label="Splayn — на головну">
+        <svg class="logo-mark" viewBox="18 18 84 98" aria-hidden="true"><rect x="40" y="100" width="40" height="14" rx="7"/><rect x="28" y="80" width="64" height="14" rx="7"/><rect x="20" y="60" width="80" height="14" rx="7"/><rect x="28" y="40" width="64" height="14" rx="7"/><rect class="top" x="40" y="20" width="40" height="14" rx="7"/></svg>
+        <span class="logo-word">Splayn</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Головне меню">
+        <a href="index.html#how">Як це працює</a>
+        <a href="#business">Бізнесу</a>
+        <a href="#about">Про нас</a>
+      </nav>
+      <div class="bar-right">
+        <button class="icon-btn" id="a11y-btn" type="button" aria-pressed="false"
+                aria-label="Версія для людей з порушенням зору">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+          </svg>
+        </button>
+        <div class="lang">
+          <span class="flag" aria-hidden="true"></span>
+          <a href="#" aria-current="true">Укр</a><span class="sep" aria-hidden="true">|</span><a href="#" class="off">Eng</a>
+        </div>
+        <a class="btn btn-login" href="#login">Увійти</a>
+        <button class="icon-btn burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Меню">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="home">
+    <div class="progress-bar" aria-hidden="true"></div>
+
+    <section class="story" id="how" aria-label="Що вміє сервіс і як працює замовлення">
+      <div class="stick">
+        <div class="hero-grid container">
+          <div class="hero-text">
+            <h1>Опишіть ідею —<br>ми її надрукуємо</h1>
+            <p>Завантажте свій файл або просто напишіть, що потрібно. ШІ підбере модель, порахує ціну й передасть замовлення в друк.</p>
+            <ul class="chips">
+              <li class="chip"><i></i>Свій файл</li>
+              <li class="chip"><i></i>ШІ-пошук моделей</li>
+              <li class="chip"><i></i>Ціна одразу</li>
+              <li class="chip"><i></i>Доставка</li>
+            </ul>
+            <a class="btn btn-lg" href="start.html">Почати</a>
+          </div>
+
+        <div class="stage3d" aria-label="Ноутбук у стилі MacBook Air">
+          <div class="rig">
+            <div class="floor-shadow"></div>
+            <div class="base-bottom"></div>
+            <div class="walls base-walls"></div>
+            <div class="deck-top alu">
+              <div class="hinge"></div>
+              <div class="keyboard" aria-hidden="true"></div>
+              <div class="trackpad"></div>
+              <div class="scoop"></div>
+            </div>
+            <div class="lid">
+              <div class="lid-back alu"></div>
+              <div class="walls lid-walls"></div>
+              <div class="lid-front alu">
+              <div class="bezel">
+                <div class="notch"></div>
+                <div class="screen">
+                  <div class="scenes">
+                    <!-- One text-free storyboard. story.js drives every element from the scroll position. -->
+                    <svg class="story-svg" viewBox="0 0 520 360" preserveAspectRatio="xMidYMid meet" role="img"
+                         aria-label="Як працює замовлення: запит, підтвердження, друк, пакування, відправка">
+                      <defs>
+                        <!-- in the part's own coordinates (the part is drawn around 0,0 and spans -30..30) -->
+                        <clipPath id="printClip"><rect id="printClipRect" x="-80" y="30" width="160" height="0"/></clipPath>
+                        <clipPath id="typeClip"><rect id="typeClipRect" x="36" y="300" width="0" height="30"/></clipPath>
+                      </defs>
+                      <rect width="520" height="360" fill="#ffffff"/>
+
+                      <!-- ===== Request, answer, approval ===== -->
+                      <g id="chat">
+                        <g id="uBubble" opacity="0">
+                          <rect x="292" y="40" width="204" height="40" rx="14" fill="#1d1d1f"/>
+                          <rect x="308" y="54" width="150" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.85"/>
+                          <rect x="308" y="65" width="104" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.85"/>
+                        </g>
+
+                        <g id="aiAvatar" opacity="0">
+                          <path d="M34 92 l2.4 5.6 l5.6 2.4 l-5.6 2.4 l-2.4 5.6 l-2.4 -5.6 l-5.6 -2.4 l5.6 -2.4 z" fill="#1d1d1f"/>
+                        </g>
+                        <g id="dots" opacity="0">
+                          <rect x="50" y="90" width="42" height="20" rx="10" fill="#f2f2f4"/>
+                          <circle class="dot" cx="62" cy="100" r="2.4" fill="#9a9aa0"/>
+                          <circle class="dot" cx="71" cy="100" r="2.4" fill="#9a9aa0"/>
+                          <circle class="dot" cx="80" cy="100" r="2.4" fill="#9a9aa0"/>
+                        </g>
+                        <g id="aBubble" opacity="0">
+                          <rect x="50" y="88" width="244" height="54" rx="14" fill="#f2f2f4"/>
+                          <rect class="aline" x="66" y="102" width="0" data-w="200" height="5" rx="2.5" fill="#b8b8be"/>
+                          <rect class="aline" x="66" y="113" width="0" data-w="170" height="5" rx="2.5" fill="#b8b8be"/>
+                          <rect class="aline" x="66" y="124" width="0" data-w="96" height="5" rx="2.5" fill="#1d1d1f"/>
+                        </g>
+
+                        <g class="photo" opacity="0">
+                          <rect x="50" y="150" width="70" height="56" rx="12" fill="#f5f5f7"/>
+                          <path id="thumb1" d="" fill="#ff7a2f" fill-rule="evenodd"/>
+                        </g>
+                        <g class="photo" opacity="0">
+                          <rect x="128" y="150" width="70" height="56" rx="12" fill="#f5f5f7"/>
+                          <g transform="translate(163 178) scale(1 0.55) translate(-163 -178)">
+                            <path id="thumb2b" d="" fill="#d4612a" fill-rule="evenodd"/>
+                            <path id="thumb2a" d="" fill="#ff7a2f" fill-rule="evenodd"/>
+                          </g>
+                        </g>
+                        <g class="photo" opacity="0">
+                          <rect x="206" y="150" width="70" height="56" rx="12" fill="#f5f5f7"/>
+                          <path id="thumb3b" d="" fill="#c7c7cc" fill-rule="evenodd"/>
+                          <path id="thumb3a" d="" fill="#ff7a2f" fill-rule="evenodd"/>
+                        </g>
+
+                        <g id="buttons" opacity="0">
+                          <circle id="approveRect" cx="330" cy="178" r="18" fill="#1d1d1f"/>
+                          <path d="M322 178.5 l5.5 5.5 l10 -11" fill="none" stroke="#ffffff" stroke-width="2.6"
+                                stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+
+                        <!-- input field: "words" appear one by one -->
+                        <rect x="24" y="300" width="472" height="30" rx="15" fill="#f2f2f4"/>
+                        <g id="words" clip-path="url(#typeClip)"></g>
+                        <rect id="caret" x="40" y="308" width="1.4" height="14" rx="0.7" fill="#1d1d1f"/>
+                        <circle cx="480" cy="315" r="11" fill="#1d1d1f"/>
+                        <path d="M480 320 v-10 M475.5 314 l4.5 -4.5 l4.5 4.5" stroke="#ffffff" stroke-width="1.8" fill="none"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+
+                        <g id="cursor" opacity="0">
+                          <path d="M0 0 L0 15 L4 11 L7 18 L10 16.5 L7 10 L12 10 Z" fill="#1d1d1f" stroke="#ffffff"
+                                stroke-width="1.2" stroke-linejoin="round"/>
+                        </g>
+
+                        <g id="confirm" opacity="0">
+                          <rect width="520" height="360" fill="#000000" fill-opacity="0.18"/>
+                          <g id="confirmCard">
+                            <circle cx="260" cy="170" r="56" fill="#ffffff"/>
+                            <circle id="confirmRing" cx="260" cy="170" r="30" fill="none" stroke="#34c759" stroke-width="4"
+                                    stroke-dasharray="189" stroke-dashoffset="189" transform="rotate(-90 260 170)"/>
+                            <path id="confirmCheck" d="M247 171 l9 9 l17 -18" fill="none" stroke="#34c759" stroke-width="4"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40"/>
+                          </g>
+                        </g>
+                      </g>
+
+                      <!-- ===== Printing, packing, shipping ===== -->
+                      <g id="shop" opacity="0">
+                        <rect width="520" height="360" fill="#f5f5f7"/>
+                        <g id="cam">
+                          <rect x="-600" y="210" width="2000" height="300" fill="#ebebee"/>
+                          <line x1="-600" y1="210" x2="1400" y2="210" stroke="#d6d6db" stroke-width="1"/>
+
+                          <g id="printer">
+                            <rect x="60" y="30" width="180" height="180" rx="12" fill="#1d1d1f"/>
+                            <rect x="72" y="44" width="156" height="148" rx="6" fill="#2c2c2e"/>
+                            <rect id="rail" x="78" y="155" width="144" height="3" rx="1.5" fill="#48484a"/>
+                            <rect x="84" y="170" width="132" height="5" rx="2" fill="#3a3a3c"/>
+                            <path id="gearPrint" d="" fill="#ff7a2f" fill-rule="evenodd" clip-path="url(#printClip)"/>
+                            <g id="head">
+                              <rect x="-12" y="-9" width="24" height="15" rx="4" fill="#e5e5ea"/>
+                              <path d="M-2.5 6 h5 l-2.5 4.5 z" fill="#8e8e93"/>
+                            </g>
+                            <g id="door">
+                              <rect x="72" y="44" width="156" height="148" rx="6" fill="#ffffff" fill-opacity="0.06"
+                                    stroke="#3a3a3c" stroke-width="1.5"/>
+                            </g>
+                          </g>
+                          <rect x="60" y="218" width="180" height="3" rx="1.5" fill="#dcdce0"/>
+                          <rect id="progress" x="60" y="218" width="0" height="3" rx="1.5" fill="#1d1d1f"/>
+
+                          <g id="box">
+                            <polygon points="330,140 470,140 494,118 354,118" fill="#6b5233"/>
+                            <polygon id="flapBack" points="354,118 494,118 494,92 354,92" fill="#c9a46e"/>
+                            <path id="gearMove" d="" fill="#ff7a2f" fill-rule="evenodd" opacity="0"/>
+                            <rect x="330" y="140" width="140" height="70" fill="#d8b27c"/>
+                            <polygon points="470,140 494,118 494,188 470,210" fill="#bf9660"/>
+                            <polygon id="flapFront" points="330,140 470,140 470,166 330,166" fill="#e0bd8a"/>
+                            <g id="tape" opacity="0">
+                              <rect id="tapeBand" x="336" y="125" width="0" height="8" fill="#efe2bf" fill-opacity="0.95"/>
+                              <rect id="tapeShine" x="336" y="126.5" width="0" height="1.6" fill="#ffffff" fill-opacity="0.6"/>
+                            </g>
+                            <g id="tapeGun" opacity="0">
+                              <circle cx="0" cy="0" r="7" fill="#e5e5ea"/>
+                              <circle cx="0" cy="0" r="2.5" fill="#8e8e93"/>
+                              <rect x="7" y="1" width="4" height="14" rx="2" fill="#1d1d1f"/>
+                            </g>
+                            <g id="labelShadow" opacity="0">
+                              <rect x="352" y="150" width="96" height="52" rx="3" fill="#000000" fill-opacity="0.22"/>
+                            </g>
+                            <g id="label" opacity="0">
+                              <g transform="translate(352 150)">
+                                <rect width="96" height="52" rx="3" fill="#ffffff"/>
+                                <rect width="96" height="10" rx="3" fill="#da291c"/>
+                                <rect y="5" width="96" height="5" fill="#da291c"/>
+                                <rect x="5" y="15" width="52" height="3.2" rx="1.6" fill="#c7c7cc"/>
+                                <rect x="5" y="21" width="70" height="3.2" rx="1.6" fill="#c7c7cc"/>
+                                <rect x="5" y="27" width="38" height="3.2" rx="1.6" fill="#c7c7cc"/>
+                                <g id="barcode" transform="translate(5 35)"></g>
+                              </g>
+                            </g>
+                          </g>
+
+                          <g id="van">
+                            <rect x="560" y="164" width="92" height="36" rx="6" fill="#ffffff" stroke="#d6d6db"/>
+                            <path d="M652 174 h20 q8 0 12 8 l6 10 v8 h-38 z" fill="#ffffff" stroke="#d6d6db"/>
+                            <path d="M656 178 h14 q5 0 8 6 l2.5 5 h-24.5 z" fill="#d6dde6"/>
+                            <circle cx="580" cy="202" r="8" fill="#1d1d1f"/>
+                            <circle cx="670" cy="202" r="8" fill="#1d1d1f"/>
+                          </g>
+
+                          <g id="house">
+                            <path d="M1000 210 V162 L1035 134 L1070 162 V210 Z" fill="#ffffff" stroke="#d6d6db"/>
+                            <rect x="1028" y="184" width="14" height="26" rx="2" fill="#d6d6db"/>
+                          </g>
+                          <g id="done" opacity="0">
+                            <circle cx="1035" cy="108" r="14" fill="#34c759"/>
+                            <path d="M1028 108 l5 5 l9 -10" fill="none" stroke="#ffffff" stroke-width="3"
+                                  stroke-linecap="round" stroke-linejoin="round"/>
+                          </g>
+                        </g>
+                      </g>
+
+                      <!-- five progress dots instead of a labeled timeline -->
+                      <g id="stageDots">
+                        <circle cx="236" cy="346" r="2.6" fill="#d1d1d6"/>
+                        <circle cx="248" cy="346" r="2.6" fill="#d1d1d6"/>
+                        <circle cx="260" cy="346" r="2.6" fill="#d1d1d6"/>
+                        <circle cx="272" cy="346" r="2.6" fill="#d1d1d6"/>
+                        <circle cx="284" cy="346" r="2.6" fill="#d1d1d6"/>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="container">© 2026 Splayn</div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/story.js"></script>
+</body>
+</html>

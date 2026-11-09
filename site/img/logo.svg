@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="12 14 96 104">
+  <style>
+    .top { fill: #2a1a12; }
+    @media (prefers-color-scheme: dark) { .top { fill: #f4ead8; } }
+  </style>
+  <rect x="40" y="100" width="40" height="14" rx="7" fill="#ff7a3d"/>
+  <rect x="28" y="80" width="64" height="14" rx="7" fill="#ff7a3d"/>
+  <rect x="20" y="60" width="80" height="14" rx="7" fill="#ff7a3d"/>
+  <rect x="28" y="40" width="64" height="14" rx="7" fill="#ff7a3d"/>
+  <rect class="top" x="40" y="20" width="40" height="14" rx="7"/>
+</svg>

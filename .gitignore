@@ -1,0 +1,16 @@
+# Secrets: each person keeps their own key
+server/.env
+.env
+
+# Customer files and slicer output
+server/uploads/
+/result.json
+
+# Python
+server/.venv/
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

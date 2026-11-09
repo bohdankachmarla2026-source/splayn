@@ -1,0 +1,488 @@
+/* MacBook Air style laptop built from CSS 3D faces.
+   Proportions follow a 13" Air: width : depth : base : lid ~ 304 : 215 : 7 : 4 mm.
+   The lid turns around the hinge from -90deg (closed, screen on the keyboard)
+   to 0deg (open, upright, 90deg to the table). Screen colors are fixed so the
+   screen looks the same in light and dark page themes. */
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--color-accent);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 10;
+}
+
+/* Long section: the lid opens in the first 10%, the screen story plays over the rest */
+.story { height: 900vh; position: relative; }
+
+/* First screen: stays in place while the laptop opens and the story plays */
+.stick {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--header-h);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-text h1 {
+  font-size: clamp(40px, 4.7vw, 74px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0 0 22px;
+}
+.hero-text p {
+  font-size: clamp(17px, 1.5vw, 21px);
+  font-weight: 700;
+  color: var(--color-muted);
+  max-width: 32ch;
+  margin: 0 0 22px;
+}
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 32px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  font-weight: 800;
+  font-size: 15px;
+}
+.chip i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* Phone and narrow tablet: text on top, laptop below */
+@media (max-width: 900px) {
+  .stick { align-items: flex-start; padding-top: calc(var(--header-h) + 8px); }
+  .hero-grid { grid-template-columns: 1fr; gap: 8px; justify-items: center; }
+  .hero-text { width: 100%; }
+  .hero-text h1 { font-size: clamp(32px, 8.5vw, 52px); margin-bottom: 12px; }
+  .hero-text p { font-size: 16px; margin-bottom: 14px; }
+  .chips { margin-bottom: 16px; }
+  .chip { font-size: 13px; padding: 7px 12px; }
+  .btn-lg { padding: 16px 32px; font-size: 18px; }
+}
+@media (max-width: 900px) and (max-height: 760px) {
+  .chips { display: none; }
+}
+
+.hint { color: var(--color-muted); font-size: 0.9rem; margin: 0; }
+
+/* ---------- 3D stage ---------- */
+
+.stage3d {
+  --w: min(540px, 42vw, 60vh);     /* laptop width (right column of the first screen) */
+  --d: calc(var(--w) * 0.707);      /* depth of base = height of lid */
+  --tb: calc(var(--w) * 0.024);     /* base thickness */
+  --tl: calc(var(--w) * 0.012);     /* lid thickness */
+  --r: calc(var(--w) * 0.034);      /* corner radius in plan view (same factor as in story.js) */
+  position: relative;
+  width: var(--w);
+  height: calc(var(--w) * 0.95);
+  perspective: calc(var(--w) * 3.2);
+  perspective-origin: 50% 40%;
+}
+
+.rig {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: var(--w);
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.rig > div, .lid > div { position: absolute; }
+
+/* Metallic silver: mid-gray base with soft highlight bands.
+   No fine brushed texture: at an angle it turns into visible stripes (moire). */
+.alu {
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 28%, rgba(255, 255, 255, 0.14) 52%, rgba(255, 255, 255, 0) 68%),
+    linear-gradient(180deg, #c6c9cd 0%, #b4b7bb 50%, #a3a6aa 100%);
+}
+.alu-edge { background: linear-gradient(180deg, #a7aaae 0%, #8d9094 60%, #7a7d81 100%); }
+
+/* ---------- Base ---------- */
+
+/* Faces that meet other faces use square corners and overlap by 1px, so no gaps show at edges and corners */
+.deck-top {
+  left: 0;
+  top: 0;
+  width: var(--w);
+  height: calc(var(--d) + 1px);
+  transform-origin: 0 0;
+  transform: rotateX(90deg);
+  border-radius: var(--r);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+.hinge {
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  top: 0;
+  height: 2.4%;
+  background: linear-gradient(180deg, #4a4a4e, #2c2c2f);
+  border-radius: 0 0 4px 4px;
+}
+
+.keyboard {
+  position: absolute;
+  left: 6.5%;
+  right: 6.5%;
+  top: 7%;
+  height: 43%;
+  padding: 0.8%;
+  background: #8f9296;
+  border-radius: calc(var(--w) * 0.008);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1.6%;
+}
+.krow { display: flex; gap: 0.55%; flex: 1 1 0; min-height: 0; }
+.krow.fn { flex: 0.6 1 0; }
+.key {
+  flex: 1 1 0;
+  background: linear-gradient(180deg, #2a2a2d, #18181a);
+  border-radius: calc(var(--w) * 0.0035);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+.key.touchid {
+  background: radial-gradient(circle at 50% 50%, #3a3a3d 0 42%, #1c1c1e 46%);
+}
+.arrows { display: flex; gap: 0.55%; align-items: flex-end; }
+.arrows .key.half { height: 48%; flex: none; }
+.arrows .ud { display: flex; flex-direction: column; justify-content: space-between; height: 100%; flex: none; }
+.arrows .ud .key { height: 48%; flex: none; }
+
+.trackpad {
+  position: absolute;
+  left: 27%;
+  width: 46%;
+  top: 55%;
+  height: 39%;
+  border-radius: calc(var(--w) * 0.01);
+  background: linear-gradient(180deg, #bcbfc3, #adb0b4);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+/* Thumb scoop, top view (MacBook Air): a wide, shallow dip in the front edge.
+   The surface slopes down toward the edge, so it gets darker toward the front.
+   No hard outline: the top of the arc fades into the deck. */
+.scoop {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 19%;
+  height: 3.2%;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.26) 100%);
+}
+
+/* Rounded side walls: built in story.js from strips (one per straight side, 8 per corner) */
+.walls { left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; }
+.walls > div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Thumb scoop, front view (MacBook Air): the top edge of the front wall is cut in a
+   wide, shallow "smile". Inside the cut: a dark gap under the lid at the top,
+   then the polished chamfer of the cut, brighter toward the curve. */
+.scoop-front {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 20%;
+  height: 72%;
+  transform: translateX(-50%);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: linear-gradient(180deg, #232427 0%, #3d3f43 30%, #8c8f93 62%, #cdd0d4 88%, #dfe1e4 100%);
+}
+.base-bottom {
+  left: 0;
+  top: var(--tb);
+  width: var(--w);
+  height: var(--d);
+  transform-origin: 0 0;
+  transform: rotateX(90deg);
+  background: #8a8d91;
+  border-radius: var(--r);
+}
+
+.floor-shadow {
+  left: calc(var(--w) * -0.08);
+  top: var(--tb);
+  width: calc(var(--w) * 1.16);
+  height: calc(var(--d) * 1.16);
+  transform-origin: 0 0;
+  transform: rotateX(90deg) translateY(calc(var(--d) * -0.08));
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.15) 45%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(6px);
+}
+
+/* ---------- Lid ---------- */
+
+.lid {
+  left: 0;
+  top: calc(var(--d) * -1);
+  width: var(--w);
+  height: var(--d);
+  transform-origin: 50% 100% 0;
+  transform: rotateX(-90deg);        /* closed */
+  transform-style: preserve-3d;
+}
+
+.lid-front, .lid-back {
+  inset: 0;
+  border-radius: var(--r);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.lid-front {
+  padding: calc(var(--w) * 0.006);
+  transform: translateZ(0.5px);
+}
+.lid-back {
+  transform: translateZ(calc(var(--tl) * -1)) rotateY(180deg);
+}
+.lid-back::after {
+  /* soft sheen instead of a logo */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0) 55%);
+}
+
+
+.bezel {
+  position: relative;
+  height: 100%;
+  background: #0a0a0b;
+  /* follows the lid corner: lid radius minus the thin aluminum rim around the bezel */
+  border-radius: calc(var(--r) - var(--w) * 0.006);
+  padding: calc(var(--w) * 0.014) calc(var(--w) * 0.014) calc(var(--w) * 0.016);
+}
+
+/* Camera notch: starts at the very top of the bezel, so no light hairline shows above it */
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13%;
+  height: calc(var(--w) * 0.038);
+  background: #0a0a0b;
+  border-radius: 0 0 calc(var(--w) * 0.01) calc(var(--w) * 0.01);
+  z-index: 3;
+}
+.notch::after {
+  /* camera */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: calc(var(--w) * 0.007);
+  height: calc(var(--w) * 0.007);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #1f2a3a;
+  box-shadow: 0 0 0 1px #121418;
+}
+
+/* ---------- Screen UI ---------- */
+
+.screen {
+  position: relative;
+  height: 100%;
+  border-radius: calc(var(--w) * 0.012) calc(var(--w) * 0.012) 2px 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  color: #1d1d1f;
+  font-size: calc(var(--w) * 0.022);
+  line-height: 1.35;
+}
+
+.menubar {
+  height: 1.9em;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.2em;
+  padding: 0 0.9em;
+  font-size: 0.8em;
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.menubar b { font-weight: 700; }
+.menubar .clock { color: #5d5d63; margin-left: auto; }   /* left items stay clear of the notch */
+
+.scenes { position: relative; flex: 1; min-height: 0; }
+.story-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#caret { animation: caret-blink 1s steps(1) infinite; }
+@keyframes caret-blink { 50% { visibility: hidden; } }
+.scene {
+  position: absolute;
+  inset: 0;
+  padding: 0.3em 0.8em;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.scene.active { opacity: 1; }
+.scene svg { width: 100%; height: 100%; display: block; }
+
+.caption-box { padding: 0 0.9em; min-height: 4.2em; flex: none; }
+.caption-box .cap { display: none; }
+.caption-box .cap.active { display: block; }
+.num {
+  display: inline-block;
+  font-size: 0.72em;
+  font-weight: 700;
+  color: #2f6fed;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.caption-box h3 { font-size: 1.1em; margin: 0.1em 0; color: #1d1d1f; }
+.caption-box p { margin: 0; font-size: 0.85em; color: #5d5d63; }
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.3em;
+  padding: 0.5em 0.6em 0.4em;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  flex: none;
+}
+.tl { text-align: center; font-size: 0.72em; color: #5d5d63; }
+.tl::before {
+  content: "";
+  display: block;
+  width: 0.9em;
+  height: 0.9em;
+  margin: 0 auto 0.3em;
+  border-radius: 50%;
+  border: 1px solid #8e8e93;
+  background: #fff;
+}
+.tl.done::before { background: #2f6fed; border-color: #2f6fed; }
+.tl.active { color: #1d1d1f; font-weight: 700; }
+.tl.active::before { background: #2f6fed; border-color: #2f6fed; box-shadow: 0 0 0 0.3em rgba(47, 111, 237, 0.2); }
+
+.dock {
+  flex: none;
+  display: flex;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 0 0 0.45em;
+}
+.dock i {
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 0.35em;
+  background: #2f6fed;
+  display: block;
+}
+.dock i:nth-child(2) { background: #34c759; }
+.dock i:nth-child(3) { background: #ff9f0a; }
+.dock i:nth-child(4) { background: #af52de; }
+.dock i:nth-child(5) { background: #8e8e93; }
+
+/* ---------- Scene graphics ---------- */
+
+.bubble { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.scene.in .bubble { opacity: 1; transform: none; }
+.scene.in .bubble:nth-child(2) { transition-delay: 0.4s; }
+.scene.in .bubble:nth-child(3) { transition-delay: 0.9s; }
+.scene.in .bubble:nth-child(4) { transition-delay: 1.4s; }
+
+.layer { transform-box: fill-box; transform-origin: center; transform: scaleX(0); transition: transform 0.5s ease; }
+.scene.in .layer { transform: scaleX(1); }
+.scene.in .layer:nth-child(2) { transition-delay: 0.25s; }
+.scene.in .layer:nth-child(3) { transition-delay: 0.5s; }
+.scene.in .layer:nth-child(4) { transition-delay: 0.75s; }
+.scene.in .layer:nth-child(5) { transition-delay: 1.0s; }
+
+.draw { fill: none; stroke: #2f6fed; stroke-width: 3; stroke-linejoin: round; }
+.scene.in .draw { animation: draw 2.4s ease forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+.nozzle { transform: translate(0, 0); }
+.scene.in .nozzle { animation: nozzle 2.4s ease forwards; }
+@keyframes nozzle { from { transform: translate(0, 0); } to { transform: translate(120px, 0); } }
+
+.counter { font-size: 14px; fill: #5d5d63; }
+
+.part { transform: translateY(-60px); opacity: 0; transition: transform 0.8s ease, opacity 0.8s ease; }
+.scene.in .part { transform: translateY(0); opacity: 1; }
+.lid-box { transform-box: fill-box; transform-origin: left center; transform: rotate(-70deg); transition: transform 0.8s ease 0.9s; }
+.scene.in .lid-box { transform: rotate(0deg); }
+
+.route { fill: none; stroke: #c7c7cc; stroke-width: 3; stroke-dasharray: 6 8; }
+.truck { transform: translateX(0); transition: transform 2.2s ease 0.3s; }
+.scene.in .truck { transform: translateX(220px); }
+.check {
+  fill: none;
+  stroke: #2f6fed;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  transition: stroke-dashoffset 0.6s ease 2.6s;
+}
+.scene.in .check { stroke-dashoffset: 0; }
+
+/* Phone: shorter scroll, captions smaller */
+@media (max-width: 900px) {
+  .stage3d { --w: min(560px, 86vw, 42vh); }
+}
+@media (max-width: 600px) {
+  .story { height: 800vh; }
+}
+
+/* Users who turn off motion: laptop open, steps still follow scroll, no movement */
+@media (prefers-reduced-motion: reduce) {
+  .scene, .bubble, .layer, .part, .lid-box, .truck, .check { transition: none !important; }
+  .scene.in .draw, .scene.in .nozzle { animation: none !important; }
+  .draw { stroke-dashoffset: 0; }
+  #caret { animation: none; }
+  .progress-bar { display: none; }
+}
